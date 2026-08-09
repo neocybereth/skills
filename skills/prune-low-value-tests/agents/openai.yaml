@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prune Low-Value Tests"
+  short_description: "Remove weak tests and simplify test-only seams"
+  default_prompt: "Use $prune-low-value-tests to audit this test suite, remove low-value coverage, and simplify test-only production seams."
