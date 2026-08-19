@@ -1,0 +1,4 @@
+interface:
+  display_name: "What Did I Do?"
+  short_description: "Turn recent Codex work into a visual recap"
+  default_prompt: "Use $whatdidido to recap what I completed today."

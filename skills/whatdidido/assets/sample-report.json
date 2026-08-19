@@ -1,0 +1,79 @@
+{
+  "invocation": "/whatdidido today?",
+  "generatedAt": "2026-08-19T17:15:00+12:00",
+  "window": {
+    "label": "Today",
+    "start": "2026-08-19T00:00:00+12:00",
+    "end": "2026-08-19T17:15:00+12:00",
+    "timezone": "Pacific/Auckland"
+  },
+  "overview": {
+    "headline": "Four meaningful wins, from faster code to clearer decisions.",
+    "summary": "The day moved two product surfaces forward, removed a recurring test failure, and turned a fuzzy API migration into a decision-ready plan. Most of the value came from shipping and verification, not just activity."
+  },
+  "scanned": {
+    "threads": 11,
+    "completedTurns": 6
+  },
+  "items": [
+    {
+      "title": "Shipped a faster activity dashboard",
+      "project": "Atlas",
+      "completedAt": "2026-08-19T16:42:00+12:00",
+      "summary": "Reduced the slowest dashboard path and put a regression check around the improvement.",
+      "details": [
+        "Replaced three sequential requests with one batched query.",
+        "Cut the representative cold-load sample from 2.4s to 1.1s.",
+        "Added a performance test covering the high-volume account case."
+      ],
+      "kind": "Shipped"
+    },
+    {
+      "title": "Fixed the flaky checkout test",
+      "project": "Beacon",
+      "completedAt": "2026-08-19T14:08:00+12:00",
+      "summary": "Removed a timing race that had made the checkout suite unreliable in CI.",
+      "details": [
+        "Waited on the observable payment state instead of a fixed timeout.",
+        "Ran the focused scenario 50 times without a failure.",
+        "Documented why the previous selector could resolve too early."
+      ],
+      "kind": "Fixed"
+    },
+    {
+      "title": "Turned the API migration into a concrete plan",
+      "project": "Northstar",
+      "completedAt": "2026-08-19T11:26:00+12:00",
+      "summary": "Mapped the migration sequence, compatibility boundary, and rollback path for review.",
+      "details": [
+        "Split the work into schema, dual-read, cutover, and cleanup phases.",
+        "Identified two clients that still depend on the legacy response shape.",
+        "Added measurable exit criteria for every phase."
+      ],
+      "kind": "Planned"
+    },
+    {
+      "title": "Closed the main accessibility gaps in settings",
+      "project": "Atlas",
+      "completedAt": "2026-08-19T09:37:00+12:00",
+      "summary": "Improved keyboard and screen-reader behavior across the account settings flow.",
+      "details": [
+        "Restored visible focus states for every interactive control.",
+        "Connected validation messages with their corresponding inputs.",
+        "Verified the full flow with keyboard-only navigation."
+      ],
+      "kind": "Improved"
+    }
+  ],
+  "inProgress": [
+    {
+      "title": "Investigating duplicate webhook delivery",
+      "project": "Beacon",
+      "summary": "Reproduced the issue locally and narrowed it to retry handling; no production fix has shipped yet."
+    }
+  ],
+  "caveats": [
+    "This demonstration uses fictional projects, measurements, and outcomes.",
+    "Only completed turns inside the requested window count toward the four wins."
+  ]
+}
