@@ -32,8 +32,8 @@ npx skills@latest add neocybereth/skills
 ```
 
 Open `/plugin`, choose **Marketplaces**, select `neocybereth-skills`, and choose
-**Enable auto-update**. Because this is a private GitHub repository,
-background updates need `GH_TOKEN` or `GITHUB_TOKEN` with read access.
+**Enable auto-update**. If the repository is made private later, background
+updates will need `GH_TOKEN` or `GITHUB_TOKEN` with read access.
 
 For managed project setup, copy [`.claude/settings.example.json`](.claude/settings.example.json)
 to `.claude/settings.json` in the consuming project.
