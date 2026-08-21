@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>QA UX Verify Report Example</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --surface: #1A1A1A;
+      --raised: #222222;
+      --text: #E0E0E0;
+      --muted: #A0A0A0;
+      --border: #2A2A2A;
+      --accent: #90CAF9;
+      --success: #A5D6A7;
+      --warning: #FFCC80;
+      --danger: #CF6679;
+      --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, "SF Mono", "SFMono-Regular", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    header,
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    header { padding: 36px 0 20px; }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h2,
+    h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    h2 { font-size: 19px; }
+    h3 { font-size: 15px; }
+
+    p { margin: 8px 0 0; }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .metric,
+    .scenario {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .metric {
+      min-height: 110px;
+      padding: 18px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .metric span,
+    dt,
+    figcaption {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .scenario {
+      margin: 18px 0;
+      padding: 20px;
+    }
+
+    .scenario-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: var(--bg);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge.fail { background: var(--danger); }
+    .badge.pass { background: var(--success); }
+    .badge.fix { background: var(--accent); }
+    .badge.warn { background: var(--warning); }
+
+    .details,
+    .timeline,
+    .evidence-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .details {
+      grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+      align-items: start;
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 10px 12px;
+      margin: 14px 0 0;
+    }
+
+    dd { margin: 0; }
+
+    .timeline {
+      margin-top: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .event {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--raised);
+    }
+
+    .event h3 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .evidence-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    figure {
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    figure img,
+    figure svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: var(--border);
+      font-family: var(--mono);
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 860px) {
+      .summary,
+      .details,
+      .timeline,
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      dl { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>QA UX verify report</h1>
+    <p>Use this structure for the single required artifact,
+      <code>qa-ux-report.html</code>. Every e2e scenario gets one durable section
+      with status, browser evidence, and follow-up notes.</p>
+
+    <section class="summary" aria-label="Run summary">
+      <div class="metric"><strong>9</strong><span>scenarios tested</span></div>
+      <div class="metric"><strong>7</strong><span>scenarios passed</span></div>
+      <div class="metric"><strong>1</strong><span>scenario failed</span></div>
+      <div class="metric"><strong>0</strong><span>open blockers</span></div>
+    </section>
+  </header>
+
+  <main>
+    <article class="scenario" id="scenario-001">
+      <div class="scenario-header">
+        <div>
+          <span class="badge pass">Passed</span>
+          <h2>SCENARIO-001: Dashboard smoke path</h2>
+          <p>This scenario passed during the browser QA run.</p>
+        </div>
+        <code>Current status: passed</code>
+      </div>
+
+      <section class="details" aria-label="Dashboard smoke path details">
+        <div>
+          <h3>Scenario details</h3>
+          <dl>
+            <dt>Source step</dt>
+            <dd>Critical Happy Path / Dashboard / Steps 1-3</dd>
+            <dt>Environment</dt>
+            <dd>Local app, desktop viewport</dd>
+            <dt>Result</dt>
+            <dd>Passed</dd>
+            <dt>Evidence</dt>
+            <dd>Desktop screenshot, DOM assertion, no console errors</dd>
+          </dl>
+        </div>
+
+        <figure>
+          <svg viewBox="0 0 960 540" role="img"
+            aria-label="Placeholder dashboard success screenshot">
+            <rect width="960" height="540" fill="#121212"/>
+            <rect x="48" y="44" width="864" height="452" rx="18" fill="#1A1A1A"
+              stroke="#2A2A2A" stroke-width="3"/>
+            <text x="92" y="118" fill="#E0E0E0" font-family="system-ui, sans-serif"
+              font-size="34" font-weight="700">Dashboard</text>
+            <rect x="92" y="170" width="230" height="128" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <rect x="362" y="170" width="230" height="128" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <rect x="632" y="170" width="230" height="128" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <rect x="92" y="338" width="770" height="86" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <text x="126" y="386" fill="#A5D6A7" font-family="system-ui, sans-serif"
+              font-size="22" font-weight="700">All expected widgets are visible</text>
+          </svg>
+          <figcaption>Success evidence:
+            <code>screenshots/001-dashboard-desktop-pass.png</code></figcaption>
+        </figure>
+      </section>
+
+      <section class="timeline" aria-label="Dashboard smoke path evidence timeline">
+        <div class="event">
+          <h3><span class="badge pass">Browser pass</span></h3>
+          <p>Browser automation verified the dashboard loaded, metrics were
+            visible, and no console errors appeared.</p>
+          <p>Evidence: <code>screenshots/001-dashboard-desktop-pass.png</code></p>
+        </div>
+        <div class="event">
+          <h3><span class="badge pass">Responsive check</span></h3>
+          <p>Mobile viewport kept the primary dashboard content readable without
+            horizontal overflow.</p>
+          <p>Evidence: <code>screenshots/002-dashboard-mobile-pass.png</code></p>
+        </div>
+      </section>
+    </article>
+
+    <article class="scenario" id="scenario-002">
+      <div class="scenario-header">
+        <div>
+          <span class="badge fail">Failed</span>
+          <h2>SCENARIO-002: Checkout payment recovery</h2>
+          <p>This scenario failed during browser verification and remains an open
+            product finding.</p>
+        </div>
+        <code>Current status: failed</code>
+      </div>
+
+      <section class="details" aria-label="Checkout payment recovery details">
+        <div>
+          <h3>Finding details</h3>
+          <dl>
+            <dt>Source step</dt>
+            <dd>Critical Happy Path / Checkout / Step 5</dd>
+            <dt>Severity</dt>
+            <dd>P1</dd>
+            <dt>Expected</dt>
+            <dd>User sees field-level recovery guidance.</dd>
+            <dt>Actual</dt>
+            <dd>Only a generic banner appeared.</dd>
+            <dt>Evidence</dt>
+            <dd>Issue-state screenshot, console log review, desktop and mobile
+              viewport checks.</dd>
+            <dt>Follow-up</dt>
+            <dd>Product code was not changed by this QA run.</dd>
+          </dl>
+        </div>
+
+        <section class="timeline" aria-label="Checkout evidence timeline">
+          <div class="event">
+            <h3><span class="badge fail">Browser issue</span></h3>
+            <p>Payment decline path lacked actionable recovery guidance.</p>
+            <p>Evidence: <code>screenshots/014-checkout-payment-desktop-fail.png</code></p>
+          </div>
+          <div class="event">
+            <h3><span class="badge warn">Mobile confirmed</span></h3>
+            <p>The same missing recovery guidance appeared on the mobile
+              viewport.</p>
+            <p>Evidence: <code>screenshots/015-checkout-payment-mobile-fail.png</code></p>
+          </div>
+        </section>
+      </section>
+
+      <section class="evidence-grid" aria-label="Checkout failure evidence">
+        <figure>
+          <svg viewBox="0 0 960 540" role="img"
+            aria-label="Placeholder checkout payment failure screenshot">
+            <rect width="960" height="540" fill="#121212"/>
+            <rect x="48" y="44" width="864" height="452" rx="18" fill="#1A1A1A"
+              stroke="#2A2A2A" stroke-width="3"/>
+            <text x="92" y="118" fill="#E0E0E0" font-family="system-ui, sans-serif"
+              font-size="34" font-weight="700">Checkout</text>
+            <rect x="92" y="170" width="360" height="56" rx="10" fill="#222222"
+              stroke="#2A2A2A" stroke-width="3"/>
+            <rect x="92" y="252" width="360" height="56" rx="10" fill="#222222"
+              stroke="#CF6679" stroke-width="4"/>
+            <rect x="92" y="334" width="360" height="56" rx="10" fill="#CF6679"/>
+            <text x="120" y="370" fill="#121212" font-family="system-ui, sans-serif"
+              font-size="20" font-weight="700">Could not process payment</text>
+            <rect x="560" y="170" width="260" height="180" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <text x="590" y="224" fill="#E0E0E0" font-family="system-ui, sans-serif"
+              font-size="24" font-weight="700">Issue state</text>
+            <text x="590" y="270" fill="#A0A0A0" font-family="system-ui, sans-serif"
+              font-size="19">Generic banner only</text>
+          </svg>
+          <figcaption>Issue-state screenshot:
+            <code>screenshots/014-checkout-payment-desktop-fail.png</code></figcaption>
+        </figure>
+
+        <figure>
+          <svg viewBox="0 0 960 540" role="img"
+            aria-label="Placeholder checkout payment mobile failure screenshot">
+            <rect width="960" height="540" fill="#121212"/>
+            <rect x="48" y="44" width="864" height="452" rx="18" fill="#1A1A1A"
+              stroke="#2A2A2A" stroke-width="3"/>
+            <text x="92" y="118" fill="#E0E0E0" font-family="system-ui, sans-serif"
+              font-size="34" font-weight="700">Checkout</text>
+            <rect x="92" y="170" width="360" height="56" rx="10" fill="#222222"
+              stroke="#2A2A2A" stroke-width="3"/>
+            <rect x="92" y="252" width="360" height="56" rx="10" fill="#222222"
+              stroke="#CF6679" stroke-width="4"/>
+            <rect x="92" y="334" width="360" height="56" rx="10" fill="#CF6679"/>
+            <text x="120" y="370" fill="#121212" font-family="system-ui, sans-serif"
+              font-size="20" font-weight="700">Could not process payment</text>
+            <rect x="560" y="170" width="260" height="180" rx="14" fill="#222222"
+              stroke="#2A2A2A" stroke-width="2"/>
+            <text x="590" y="224" fill="#E0E0E0" font-family="system-ui, sans-serif"
+              font-size="24" font-weight="700">Mobile state</text>
+            <text x="590" y="270" fill="#A0A0A0" font-family="system-ui, sans-serif"
+              font-size="19">Still missing on mobile</text>
+          </svg>
+          <figcaption>Mobile issue-state screenshot:
+            <code>screenshots/015-checkout-payment-mobile-fail.png</code></figcaption>
+        </figure>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
