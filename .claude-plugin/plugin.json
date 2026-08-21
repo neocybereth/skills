@@ -1,0 +1,16 @@
+{
+  "name": "neocybereth-skills",
+  "version": "0.1.0",
+  "description": "Sam's shared engineering, research, design, goal-setting, QA, and work-recap workflows",
+  "author": {
+    "name": "neocybereth"
+  },
+  "repository": "https://github.com/neocybereth/skills",
+  "keywords": [
+    "agent-skills",
+    "compound-engineering",
+    "frontend",
+    "research",
+    "workflows"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "neocybereth-skills",
+  "owner": {
+    "name": "neocybereth"
+  },
+  "description": "Sam's shared, version-controlled AI workflow collection",
+  "plugins": [
+    {
+      "name": "neocybereth-skills",
+      "source": "./",
+      "description": "Shared engineering, research, design, QA, and productivity workflows",
+      "version": "0.1.0",
+      "category": "Coding"
+    }
+  ]
+}

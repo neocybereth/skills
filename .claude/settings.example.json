@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "neocybereth-skills": {
+      "source": {
+        "source": "github",
+        "repo": "neocybereth/skills"
+      },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "neocybereth-skills@neocybereth-skills": true
+  }
+}
