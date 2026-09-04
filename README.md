@@ -6,6 +6,7 @@ Claude/Codex plugin marketplace.
 
 ## Included skills
 
+- [`double-check`](skills/double-check/SKILL.md) automatically reflects on newly written code before handoff, applies worthwhile simplifications, and reruns proportionate verification.
 - [`prune-low-value-tests`](skills/prune-low-value-tests/SKILL.md) audits test value, removes implementation-coupled or duplicative coverage, simplifies test-only production seams, and records durable testing guidance.
 - [`qa-ux-plan`](skills/qa-ux-plan/SKILL.md) creates end-to-end QA and UX verification plans from a branch diff without executing tests.
 - [`qa-ux-verify`](skills/qa-ux-verify/SKILL.md) executes QA and UX plans with browser automation and produces evidence-backed HTML reports without fixing product issues.

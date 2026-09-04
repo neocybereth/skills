@@ -1,0 +1,6 @@
+interface:
+  display_name: "Double Check"
+  short_description: "Reflect on code before handoff"
+  default_prompt: "Use $double-check to review and improve the code I just wrote."
+policy:
+  allow_implicit_invocation: true
